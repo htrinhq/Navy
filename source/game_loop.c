@@ -44,24 +44,15 @@ int game_loop(map_t *map, int ac, char **av)
 	while (42) {
 		display_position(map);
 		if (one_two > 0) {
-			display_attack(coordinate);
+			coordinate = display_attack(coordinate);
+			pause();
 		} else {
 			coordinate = display_wait(coordinate);
 		}
 		my_printf("%d // %d\n", coordinate[0], coordinate[1]);
-		pause();
 		one_two = one_two * -1;
 	}
 	return (0);
-}
-
-void my_handler(int signum, siginfo_t *siginfo, void *context)
-{
-	(void)context;
-	if (signum == SIGUSR1 || signum == SIGUSR2)
-		glob.p2_pid = siginfo->si_pid;
-	return;
-	
 }
 
 void connection_check(int ac, char **av)

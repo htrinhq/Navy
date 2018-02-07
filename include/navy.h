@@ -18,18 +18,15 @@
 #include "str.h"
 #include "stdyo.h"
 
-//int p2_pid;
-typedef struct global {
+typedef struct info_sig {
 	int p2_pid;
-	int i;
-} glob_t;
+	int signum;
+} info_t;
 
 typedef struct map {
 	char **player;
 	char **enemy;
 } map_t;
-
-glob_t glob;
 
 int check_option(int ac, char **av);
 void display_help(void);
@@ -44,12 +41,13 @@ void my_handler(int signum, siginfo_t *siginfo, void *context);
 void fill_struct(map_t *map, int ac, char **av);
 void connection_check(int ac, char **av);
 void display_position(map_t *map);
-void display_attack(int *coordinate);
+int *display_attack(int *coordinate);
 int *display_wait(int *coordinate);
 void send_sig(int nb);
 int get_sig(void);
 char *input(void);
 int *char_to_int(char *str);
-void my_handler2(int signo);
+info_t stock_info(siginfo_t *siginfo, int bo);
+void make_sig(void);
 
 #endif
