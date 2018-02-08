@@ -30,7 +30,7 @@ typedef struct map {
 
 int check_option(int ac, char **av);
 void display_help(void);
-void get_player_map(char **map, char *path);
+int get_player_map(char **map, char *path);
 char **set_ships(char **map, char *buf);
 char **fill_first_lines(char **player, int x, char letter);
 void fill_other_lines(int *x, char **player, int y);
@@ -38,8 +38,8 @@ char **fill_map(char **player);
 void display_tab(char **tab);
 int game_loop(map_t *map, int ac, char **av);
 void my_handler(int signum, siginfo_t *siginfo, void *context);
-void fill_struct(map_t *map, int ac, char **av);
-void connection_check(int ac, char **av);
+int fill_struct(map_t *map, int ac, char **av);
+int connection_check(int ac, char **av);
 void display_position(map_t *map);
 void display_attack(map_t *map);
 void display_wait(map_t *map);

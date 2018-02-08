@@ -39,7 +39,8 @@ int game_loop(map_t *map, int ac, char **av)
 
 	if (ac != 3)
 		one_two = 1;
-	connection_check(ac, av);
+	if (connection_check(ac, av))
+		return (84);
 	while (42) {
 		if ((ac == 3 && one_two < 0) || (ac == 2 && one_two > 0))
 			display_position(map);
@@ -56,7 +57,7 @@ int game_loop(map_t *map, int ac, char **av)
 	}
 }
 
-void connection_check(int ac, char **av)
+int connection_check(int ac, char **av)
 {
 	struct sigaction *sig = malloc(sizeof(struct sigaction));
 	info_t info;
@@ -75,7 +76,12 @@ void connection_check(int ac, char **av)
 	} else if (ac == 3) {
 		if (kill(my_atoi(av[1]), SIGUSR1) == 0)
 			my_putstr("successfully connected\n");
+		else {
+			my_printf("unnable to connect to host\n");
+			return (1);
+		}
 	}
+	return (0);
 }
 
 int check_win(int turn, map_t *map)

@@ -65,12 +65,19 @@ char **fill_map(char **player)
 	return (player);
 }
 
-void fill_struct(map_t *map, int ac, char **av)
+int fill_struct(map_t *map, int ac, char **av)
 {
+	int error = 0;
+
 	map->player = fill_map(map->player);
 	map->enemy = fill_map(map->enemy);
 	if (ac == 2)
-		get_player_map(map->player, av[1]);
+		error = get_player_map(map->player, av[1]);
+		if (error)
+			return (error);
 	if (ac == 3)
 		get_player_map(map->player, av[2]);
+		if (error)
+			return (error);
+	return (0);
 }
