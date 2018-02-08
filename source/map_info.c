@@ -42,6 +42,12 @@ void update_enemy_map(char **map, int *nbsig, int signum)
 	}
 }
 
+int is_map_correct(char *buf)
+{
+	if (buf[1] != ':' || buf[4] != ':')
+		return (84);
+}
+
 void get_player_map(char **map, char *path)
 {
 	int fd = open(path, O_RDONLY);
