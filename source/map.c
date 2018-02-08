@@ -65,37 +65,12 @@ char **fill_map(char **player)
 	return (player);
 }
 
-void get_player_map(char **map, char *path)
+void fill_struct(map_t *map, int ac, char **av)
 {
-	int fd = open(path, O_RDONLY);
-	char *buf = malloc(sizeof(char) * 8);
-	int i = 0;
-
-	while (i < 4) {
-		buf = malloc(sizeof(char) * 8);
-		read(fd, buf, 8);
-		buf[7] = '\0';
-		map = set_ships(map, buf);
-		i = i + 1;
-	}
-}
-
-char **set_ships(char **map, char *buf)
-{
-	int x = 2 + ((buf[2] - 'A') * 2);
-	int y = 2 + (buf[3] - 49);
-	int limx = x + ((buf[0] - 48) * 2);
-	int limy = y + (buf[0] - 48);
-
-	while (x < limx && limy > y) {
-		if (map[y][x])
-			map[y][x] = buf[0];
-		if (buf[2] - buf[5] != 0)
-			x = x + 2;
-		else if (buf[3] - buf[6] != 0)
-			y = y + 1;
-		else
-			return (NULL);
-	}
-	return (map);
+	map->player = fill_map(map->player);
+	map->enemy = fill_map(map->enemy);
+	if (ac == 2)
+		get_player_map(map->player, av[1]);
+	if (ac == 3)
+		get_player_map(map->player, av[2]);
 }

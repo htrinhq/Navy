@@ -13,8 +13,6 @@ void send_sig(int nb)
 	info_t info ;
 
 	info = stock_info(NULL, 0);
-	printf("pid = %d\n", info.p2_pid);
-	printf("signo = %d\n", info.signum);
 	while (i < nb) {
 		kill(info.p2_pid, SIGUSR1);
 		i = i + 1;
@@ -32,8 +30,6 @@ int get_sig(void)
 	while (info.signum != SIGUSR2) {
 		make_sig();
 		info = stock_info(NULL, 0);
-		printf("pid = %d\n", info.p2_pid);
-		printf("signo = %d\n", info.signum);
 		if (info.signum == SIGUSR1)
 			nb = nb + 1;
 		else if (info.signum == SIGUSR2)
@@ -45,12 +41,12 @@ int get_sig(void)
 
 void make_sig(void)
 {
-	struct sigaction *sig = malloc(sizeof(struct sigaction));
+/*	struct sigaction *sig = malloc(sizeof(struct sigaction));
 
 	sig->sa_flags = (SA_SIGINFO);
 	sig->sa_sigaction = my_handler;
 	sigaction(SIGUSR1, sig, NULL);
-	sigaction(SIGUSR2, sig, NULL);
+	sigaction(SIGUSR2, sig, NULL);*/
 	pause();
 }
 

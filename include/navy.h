@@ -41,13 +41,18 @@ void my_handler(int signum, siginfo_t *siginfo, void *context);
 void fill_struct(map_t *map, int ac, char **av);
 void connection_check(int ac, char **av);
 void display_position(map_t *map);
-int *display_attack(int *coordinate);
-int *display_wait(int *coordinate);
+void display_attack(map_t *map);
+void display_wait(map_t *map);
 void send_sig(int nb);
 int get_sig(void);
 char *input(void);
 int *char_to_int(char *str);
 info_t stock_info(siginfo_t *siginfo, int bo);
 void make_sig(void);
+int update_player_map(char **map, int *nbsig);
+void update_enemy_map(char **map, int *nbsig, int signum);
+int check_cmd(char *str);
+int count_in_str(char *str, char c);
+int check_win(int turn, map_t *map);
 
 #endif

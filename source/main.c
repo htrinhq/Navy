@@ -21,13 +21,3 @@ int main(int ac, char **av)
 	ret = game_loop(map, ac, av);
 	return (ret);
 }
-
-void fill_struct(map_t *map, int ac, char **av)
-{
-	map->player = fill_map(map->player);
-	map->enemy = fill_map(map->enemy);
-	if (ac == 2)
-		get_player_map(map->player, av[1]);
-	if (ac == 3)
-		get_player_map(map->player, av[2]);
-}
