@@ -60,7 +60,6 @@ int game_loop(map_t *map, int ac, char **av)
 int connection_check(int ac, char **av)
 {
 	struct sigaction *sig = malloc(sizeof(struct sigaction));
-	info_t info;
 
 	sig->sa_flags = SA_SIGINFO;
 	sig->sa_sigaction = my_handler;
@@ -68,16 +67,12 @@ int connection_check(int ac, char **av)
 	sigaction(SIGUSR2, sig, NULL);
 	my_printf("my_pid: %d\n", getpid());
 	if (ac == 2) {
-		my_putstr("waiting for enemy connection...");
-		pause();
-		my_putstr("\n\nenemy connected\n");
-		info = stock_info(NULL, 0);
-		kill(info.p2_pid, SIGUSR1);
+		display_p1();
 	} else if (ac == 3) {
 		if (kill(my_atoi(av[1]), SIGUSR1) == 0)
 			my_putstr("successfully connected\n");
 		else {
-			my_printf("unnable to connect to host\n");
+			my_puterr("unable to connect to host\n");
 			return (1);
 		}
 	}

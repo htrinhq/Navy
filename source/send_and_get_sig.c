@@ -27,6 +27,7 @@ int get_sig(void)
 	int nb = 0;
 	info_t info;
 
+	info.signum = 0;
 	while (info.signum != SIGUSR2) {
 		pause();
 		info = stock_info(NULL, 0);

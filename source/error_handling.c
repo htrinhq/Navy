@@ -39,3 +39,14 @@ void display_help(void)
 	my_putstr("navy_positions\t");
 	my_putstr("file representing the positions of the ships.\n");
 }
+
+void display_p1(void)
+{
+	info_t info;
+
+	my_putstr("waiting for enemy connection...");
+	pause();
+	my_putstr("\n\nenemy connected\n");
+	info = stock_info(NULL, 0);
+	kill(info.p2_pid, SIGUSR1);
+}

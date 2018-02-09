@@ -53,5 +53,6 @@ void update_enemy_map(char **map, int *nbsig, int signum);
 int check_cmd(char *str);
 int count_in_str(char *str, char c);
 int check_win(int turn, map_t *map);
+void display_p1(void);
 
 #endif
