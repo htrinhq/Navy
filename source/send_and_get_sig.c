@@ -10,7 +10,7 @@
 void send_sig(int nb)
 {
 	int i = 0;
-	info_t info ;
+	info_t info;
 
 	info = stock_info(NULL, 0);
 	while (i < nb) {

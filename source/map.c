@@ -33,7 +33,7 @@ char **fill_first_lines(char **player, int x, char letter)
 
 void fill_other_lines(int *x, char **player, int y)
 {
-	while(*x < 17) {
+	while (*x < 17) {
 		if (*x % 2 == 0)
 			player[y][*x] = '.';
 		else
