@@ -48,7 +48,6 @@ int get_sig(void);
 char *input(void);
 int *char_to_int(char *str);
 info_t stock_info(siginfo_t *siginfo, int bo);
-void make_sig(void);
 int update_player_map(char **map, int *nbsig);
 void update_enemy_map(char **map, int *nbsig, int signum);
 int check_cmd(char *str);

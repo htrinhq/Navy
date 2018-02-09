@@ -28,7 +28,7 @@ int get_sig(void)
 	info_t info;
 
 	while (info.signum != SIGUSR2) {
-		make_sig();
+		pause();
 		info = stock_info(NULL, 0);
 		if (info.signum == SIGUSR1)
 			nb = nb + 1;
@@ -37,17 +37,6 @@ int get_sig(void)
 		info = stock_info(NULL, 1);
 	}
 	return (nb);
-}
-
-void make_sig(void)
-{
-/*	struct sigaction *sig = malloc(sizeof(struct sigaction));
-
-	sig->sa_flags = (SA_SIGINFO);
-	sig->sa_sigaction = my_handler;
-	sigaction(SIGUSR1, sig, NULL);
-	sigaction(SIGUSR2, sig, NULL);*/
-	pause();
 }
 
 void my_handler(int signum, siginfo_t *siginfo, void *context)

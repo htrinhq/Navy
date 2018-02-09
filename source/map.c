@@ -71,13 +71,15 @@ int fill_struct(map_t *map, int ac, char **av)
 
 	map->player = fill_map(map->player);
 	map->enemy = fill_map(map->enemy);
-	if (ac == 2)
+	if (ac == 2) {
 		error = get_player_map(map->player, av[1]);
 		if (error)
 			return (error);
-	if (ac == 3)
+	}
+	if (ac == 3) {
 		get_player_map(map->player, av[2]);
 		if (error)
 			return (error);
+	}
 	return (0);
 }
