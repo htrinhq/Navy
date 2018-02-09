@@ -13,11 +13,11 @@ int main(int ac, char **av)
 	int ret = 0;
 
 	ret = check_option(ac, av);
-	if (fill_struct(map, ac, av))
-		return (84);
 	if (ret == 1)
 		return (0);
 	if (ret == 84)
+		return (84);
+	if (fill_struct(map, ac, av))
 		return (84);
 	ret = game_loop(map, ac, av);
 	return (ret);
