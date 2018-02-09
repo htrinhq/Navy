@@ -12,6 +12,10 @@ SRC	=	source/converters.c	\
 		source/my_evil_str.c	\
 		source/my_printf_bootstrap.c	\
 		source/my_printf.c	\
+		source/my_putchar.c	\
+		source/my_put_nbr.c	\
+		source/my_putstr.c	\
+		source/my_strlen.c	\
 		source/unsignedgetnumber.c	\
 		source/switch_printf.c
 
@@ -19,7 +23,7 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	libprint.a
 
-CFLAGS	=	-W -Wall -Wextra -Werror -I ../../include
+CFLAGS	=	-W -Wall -Wextra -Werror -I include
 
 all:	$(NAME)
 
