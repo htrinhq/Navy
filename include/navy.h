@@ -41,7 +41,7 @@ void my_handler(int signum, siginfo_t *siginfo, void *context);
 int fill_struct(map_t *map, int ac, char **av);
 int connection_check(int ac, char **av);
 void display_position(map_t *map);
-void display_attack(map_t *map);
+int display_attack(map_t *map);
 void display_wait(map_t *map);
 void send_sig(int nb);
 int get_sig(void);
@@ -54,5 +54,7 @@ int check_cmd(char *str);
 int count_in_str(char *str, char c);
 int check_win(int turn, map_t *map);
 void display_p1(void);
+int game(int one_two, map_t *map, int ac);
+void transmit_attack(map_t *map, int *coordinate);
 
 #endif

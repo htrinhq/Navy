@@ -7,51 +7,18 @@
 
 #include "navy.h"
 
-char *input(void)
-{
-	char *cmd = malloc(sizeof(char) * 2);
-	char *final;
-
-	read(0, cmd, 1);
-	cmd[1] = '\0';
-	final = my_strcat(NULL, cmd);
-	while (cmd[0] != '\n') {
-		read(0, cmd, 1);
-		if (cmd[0] != '\n')
-			final = my_strcat(final, cmd);
-	}
-	return (final);
-}
-
-int *char_to_int(char *str)
-{
-	int *sint = malloc(sizeof(int) * 3);
-
-	sint[0] = str[0] - '@';
-	sint[1] = str[1] - '0';
-	sint[2] = '\0';
-	return (sint);
-}
-
 int game_loop(map_t *map, int ac, char **av)
 {
 	int one_two = -1;
+	int ret = 0;
 
-	if (ac != 3)
+	if (ac == 2)
 		one_two = 1;
 	if (connection_check(ac, av))
 		return (84);
 	while (42) {
-		if ((ac == 3 && one_two < 0) || (ac == 2 && one_two > 0))
-			display_position(map);
-		stock_info(NULL, 1);
-		if (one_two > 0)
-			display_attack(map);
-		if (check_win(one_two, map))
-			return (0);
-		if (one_two < 0)
-			display_wait(map);
-		if (check_win(one_two, map))
+		ret = game(one_two, map, ac);
+		if (ret == 0)
 			return (0);
 		one_two = one_two * -1;
 	}
@@ -101,4 +68,24 @@ int check_win(int turn, map_t *map)
 		y = y + 1;
 	}
 	return (0);
+}
+
+int game(int one_two, map_t *map, int ac)
+{
+	int ret = 1;
+
+	if ((ac == 3 && one_two < 0) || (ac == 2 && one_two > 0))
+		display_position(map);
+	stock_info(NULL, 1);
+	if (one_two > 0)
+		ret = display_attack(map);
+	if (ret == 0)
+		return (0);
+	if (check_win(one_two, map))
+		return (0);
+	if (one_two < 0)
+		display_wait(map);
+	if (check_win(one_two, map))
+		return (0);
+	return (1);
 }

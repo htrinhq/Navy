@@ -59,3 +59,15 @@ info_t stock_info(siginfo_t *siginfo, int bo)
 		buf.signum = 0;
 	return (buf);
 }
+
+void transmit_attack(map_t *map, int *coordinate)
+{
+	info_t info;
+
+	send_sig(coordinate[0]);
+	usleep(8000);
+	send_sig(coordinate[1]);
+	info = stock_info(NULL, 0);
+	update_enemy_map(map->enemy, coordinate, info.signum);
+	usleep(8000);
+}

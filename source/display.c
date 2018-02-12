@@ -16,28 +16,27 @@ void display_position(map_t *map)
 	display_tab(map->enemy);
 }
 
-void display_attack(map_t *map)
+int display_attack(map_t *map)
 {
 	int *coordinate;
 	char *cmd;
-	info_t info;
 	int bo = 0;
 
 	my_printf("\nattack: ");
 	cmd = input();
+	if (cmd == NULL)
+		return (0);
 	bo = check_cmd(cmd);
 	while (bo == 0) {
 		my_printf("attack: ");
 		cmd = input();
+		if (cmd == NULL)
+			return (1);
 		bo = check_cmd(cmd);
 	}
 	coordinate = char_to_int(cmd);
-	send_sig(coordinate[0]);
-	usleep(8000);
-	send_sig(coordinate[1]);
-	info = stock_info(NULL, 0);
-	update_enemy_map(map->enemy, coordinate, info.signum);
-	usleep(8000);
+	transmit_attack(map, coordinate);
+	return (1);
 }
 
 void display_wait(map_t *map)
