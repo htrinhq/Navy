@@ -46,6 +46,8 @@ int is_map_correct(char *buf)
 {
 	if (buf[1] != ':' || buf[4] != ':')
 		return (84);
+	if (buf[5] < 'A' || buf[5] > 'H' || buf[6] < '1' || buf[6] > '8')
+		return (84);
 	if (buf[2] == buf[5] && (buf[2] > '@' && buf[2] < 'I')) {
 		if ((buf[6] - '0') - (buf[3] - '0') != (buf[0] - '0') - 1)
 			return (84);
@@ -70,7 +72,7 @@ int get_player_map(char **map, char *path)
 		buf[7] = '\0';
 		correct = is_map_correct(buf);
 		if (correct == 84) {
-			my_printf("incorrect map\n");
+			my_puterr("incorrect map\n");
 			return (84);
 		}
 		map = set_ships(map, buf);
