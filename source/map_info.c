@@ -17,8 +17,13 @@ int update_player_map(char **map, int *nbsig)
 		my_printf("%c%d", nbsig[0] + 64, nbsig[1]);
 		my_putstr(": hit\n");
 		return (1);
-	} else if (map[y][x] == '.' || map[y][x] == 'o' || map[y][x] == 'x') {
+	} else if (map[y][x] == '.' || map[y][x] == 'o') {
 		map[y][x] = 'o';
+		my_printf("%c%d", nbsig[0] + 64, nbsig[1]);
+		my_putstr(": missed\n");
+		return (0);
+	}
+	if (map[y][x] == 'x') {
 		my_printf("%c%d", nbsig[0] + 64, nbsig[1]);
 		my_putstr(": missed\n");
 		return (0);
