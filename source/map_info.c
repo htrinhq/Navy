@@ -12,12 +12,12 @@ int update_player_map(char **map, int *nbsig)
 	int x = (nbsig[0] * 2);
 	int y = 1 + nbsig[1];
 
-	if (map[y][x] != '.' && map[y][x] != 'o') {
+	if (map[y][x] != '.' && map[y][x] != 'o' && map[y][x] != 'x') {
 		map[y][x] = 'x';
 		my_printf("%c%d", nbsig[0] + 64, nbsig[1]);
 		my_putstr(": hit\n");
 		return (1);
-	} else if (map[y][x] == '.' || map[y][x] == 'o') {
+	} else if (map[y][x] == '.' || map[y][x] == 'o' || map[y][x] == 'x') {
 		map[y][x] = 'o';
 		my_printf("%c%d", nbsig[0] + 64, nbsig[1]);
 		my_putstr(": missed\n");
