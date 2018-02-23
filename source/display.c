@@ -48,9 +48,9 @@ void display_wait(map_t *map)
 	coordinate = malloc(sizeof(int) * 2);
 	my_printf("\nwaiting for enemy's attack...\n");
 	coordinate[0] = get_sig();
-	usleep(800);
+	usleep(8000);
 	coordinate[1] = get_sig();
-	usleep(15000);
+	usleep(8000);
 	if (update_player_map(map->player, coordinate))
 		kill(info.p2_pid, SIGUSR1);
 	else
