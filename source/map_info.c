@@ -44,6 +44,9 @@ void update_enemy_map(char **map, int *nbsig, int signum)
 
 int is_map_correct(char *buf)
 {
+	static int i = 0;
+	static int count = 0;
+
 	if (buf[1] != ':' || buf[4] != ':')
 		return (84);
 	if (buf[5] < 'A' || buf[5] > 'H' || buf[6] < '1' || buf[6] > '8')
@@ -56,6 +59,10 @@ int is_map_correct(char *buf)
 			return (84);
 		}
 	}
+	count = count + 1;
+	i = i + buf[0] - '0';
+	if ((i != 14 && count == 4) || (buf[2] != buf[5] && buf[3] != buf[6]))
+		return (84);
 	return (0);
 }
 
